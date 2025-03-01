@@ -896,8 +896,7 @@ function loadGAPI() {
         })
         .then(function(response) {
             console.log("Response", JSON.parse(response.body));
-            var prod = JSON.parse(response.body.value[1]);
-           console.log(prod);
+            parseSheetData(response);
             
        
         }, function(err) { 
@@ -909,6 +908,38 @@ function loadGAPI() {
     window.onload = loadGAPI;
      
    
+
+    function parseSheetData(response) {
+    if (!response || !response.result || !response.result.values) {
+        console.error("Invalid response structure");
+        return;
+    }
+
+    const values = response.result.values;
+    if (values.length < 2) {
+        console.warn("No data found");
+        return;
+    }
+
+    // Extract headers from the first row
+    const headers = values[0];
+
+    // Extract data rows
+    const products = values.slice(1).map(row => {
+        let productObj = {};
+        headers.forEach((key, index) => {
+            productObj[key] = row[index] || ""; // Handle missing values
+        });
+        return productObj;
+    });
+
+    console.log(products);
+}
+
+
+
+
+
 
 
 // let accessToken = "";
