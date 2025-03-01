@@ -864,22 +864,27 @@ https://templatemo.com/tm-571-hexashop
     </script>
 
 <script>
+
   function execute() {
+    console.log("Click 1")
     return gapi.client.sheets.spreadsheets.values.get({
       "spreadsheetId": "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
       "range": "ProductList",
       "dateTimeRenderOption": "FORMATTED_STRING",
       "majorDimension": "ROWS",
       "valueRenderOption": "FORMATTED_VALUE"
-    })
-        .then(function(response) {
+    }) .then(function(response) {
+        console.log("Click 2")
                 // Handle the results here (response.result has the parsed body).
                 console.log("Response", response);
+                console.log("Click 3")
               },
-              function(err) { console.error("Execute error", err); });
+              function(err) { 
+                console.error("Execute error", err); 
+            });
   }
   gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: "YOUR_CLIENT_ID"});
+    gapi.auth2.init({client_id: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com"});
   });
  
      
