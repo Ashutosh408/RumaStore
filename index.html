@@ -945,7 +945,7 @@ function fetchGoogleSheet() {
         majorDimension: "ROWS",
         valueRenderOption: "FORMATTED_VALUE"
     }).then(response => {
-        console.log("Response:", response.result.values);
+        console.log("Response:", response);
     }).catch(err => console.error("Execute error", err));
 }
 
