@@ -925,7 +925,7 @@ function loadGAPI() {
     
     var products ;
     for (let i = 0; i < values.length; i++) {
-        const headers = values[i];
+        const headers = values[i + 1];
          products = values.slice(1).map(row => {
         let productObj = {};
         headers.forEach((key, index) => {
