@@ -964,7 +964,7 @@ function initGoogleSignIn() {
 window.onload = () => {
     initializeGAPI();
     initGoogleSignIn();
-    document.getElementById("fetch-data").addEventListener("click", fetchGoogleSheet);
+    $(document).click(function(){ fetchGoogleSheet();});
 };
 </script>
 
