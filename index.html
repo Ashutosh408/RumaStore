@@ -859,13 +859,12 @@ https://templatemo.com/tm-571-hexashop
         });
 
 function onLoad(){
-    const CLIENT_ID = "your-client-id.apps.googleusercontent.com";
-    const API_KEY = "your-api-key";
+    const CLIENT_ID = "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com";
+    const API_KEY = "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";
     const DISCOVERY_DOCS = [];
     const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
-    function handleAuthClick() {
-      gapi.load("client:auth2", () => {
+    gapi.load("client:auth2", () => {
         gapi.client.init({ apiKey: "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", clientId: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com", discoveryDocs: DISCOVERY_DOCS, scope: SCOPES }).then(() => {
           gapi.auth2.getAuthInstance().signIn().then(() => {
             console.log("Auth Done");
@@ -874,9 +873,10 @@ function onLoad(){
           });
         });
       });
-    }
 
-    function readSheet() {
+}
+
+function readSheet() {
         console.log("Read Sheet 1");
       const sheetID = "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY";
       const range = "ProductList";
@@ -887,10 +887,8 @@ function onLoad(){
         console.log("Read Sheet 4");
       });
     }
-
-}
-
-    onLoad();
+onLoad();
+   
     </script>
 
   </body>
