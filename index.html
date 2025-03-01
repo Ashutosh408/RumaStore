@@ -865,28 +865,71 @@ https://templatemo.com/tm-571-hexashop
 
 <script>
 
-  function execute() {
-    console.log("Click 1")
-    return gapi.client.sheets.spreadsheets.values.get({
-      "spreadsheetId": "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
-      "range": "ProductList",
-      "dateTimeRenderOption": "FORMATTED_STRING",
-      "majorDimension": "ROWS",
-      "valueRenderOption": "FORMATTED_VALUE"
-    }) .then(function(response) {
-        console.log("Click 2")
-                // Handle the results here (response.result has the parsed body).
-                console.log("Response", response);
-                console.log("Click 3")
-              },
-              function(err) { 
-                console.error("Execute error", err); 
-            });
-  }
-  gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com"});
-  });
+//   function execute() {
+//     console.log("Click 1")
+//     return gapi.client.sheets.spreadsheets.values.get({
+//       "spreadsheetId": "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
+//       "range": "ProductList",
+//       "dateTimeRenderOption": "FORMATTED_STRING",
+//       "majorDimension": "ROWS",
+//       "valueRenderOption": "FORMATTED_VALUE"
+//     }) .then(function(response) {
+//         console.log("Click 2")
+//                 // Handle the results here (response.result has the parsed body).
+//                 console.log("Response", response);
+//                 console.log("Click 3")
+//               },
+//               function(err) { 
+//                 console.error("Execute error", err); 
+//             });
+//   }
+//   gapi.load("client:auth2", function() {
+//     gapi.auth2.init({client_id: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com"});
+//   });
  
+
+
+
+function loadGAPI() {
+        gapi.load("client:auth2", function() {
+            gapi.client.init({
+                apiKey: "AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E",
+                clientId: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com",
+                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+                scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
+            }).then(function() {
+                console.log("GAPI Initialized");
+            }).catch(function(error) {
+                console.error("Error loading GAPI", error);
+            });
+        });
+    }
+
+    function execute() {
+        if (!gapi.client.sheets) {
+            console.error("GAPI client not initialized yet.");
+            return;
+        }
+
+        console.log("Click 1");
+        return gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
+            range: "ProductList",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE"
+        })
+        .then(function(response) {
+            console.log("Click 2");
+            console.log("Response", response);
+            console.log("Click 3");
+        }, function(err) { 
+            console.error("Execute error", err);
+        });
+    }
+
+    // Load GAPI on page load
+    window.onload = loadGAPI;
      
    
 </script>
