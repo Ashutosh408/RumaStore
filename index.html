@@ -924,16 +924,20 @@ function loadGAPI() {
     // Extract headers from the first row
     const headers = values[0];
 
-    // Map rows to objects
+    // Map rows to objects safely
     const products = values.slice(1).map(row => {
+        if (!Array.isArray(row)) {
+            console.warn("Skipping invalid row:", row);
+            return null;
+        }
+
         let productObj = {};
         headers.forEach((key, index) => {
             productObj[key] = row[index] || ""; // Handle missing values
         });
-
         return productObj;
-    });
-console.log(products)
+    }).filter(item => item !== null); // Remove invalid rows
+console.log("Prod" , products)
     return products;
 }
 
