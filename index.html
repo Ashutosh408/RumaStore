@@ -891,6 +891,7 @@ https://templatemo.com/tm-571-hexashop
 
 
 function loadGAPI() {
+    console.log("1. loadGAPI")
         gapi.load("client:auth2", function() {
             gapi.client.init({
                 apiKey: "AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E",
@@ -906,6 +907,7 @@ function loadGAPI() {
     }
 
     function execute() {
+        console.log("2. execute")
         if (!gapi.client.sheets) {
             console.error("GAPI client not initialized yet.");
             return;
