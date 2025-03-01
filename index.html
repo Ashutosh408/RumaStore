@@ -925,11 +925,12 @@ function loadGAPI() {
     
     var products ;
     for (let i = 0; i < values.length; i++) {
-        debugger;
+        
         const headers = values[i];
          products = values.slice(1).map(row => {
         let productObj = {};
         headers.forEach((key, index) => {
+            debugger;
             productObj[key] = row[index] || ""; // Handle missing values
         });
         return productObj;
