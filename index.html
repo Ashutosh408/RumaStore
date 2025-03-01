@@ -920,26 +920,43 @@ function loadGAPI() {
         console.warn("No data found");
         return;
     }
-    console.log(values[0].length);
-    // Extract headers from the first row
+//     console.log(values[0].length);
+//     // Extract headers from the first row
     
-    var products ;
-    for (let i = 1; i < values.length; i++) {
-        const headers = values[i];
-        debugger;
-         products = values.slice(1).map(row => {
-        let productObj = {};
-        headers.forEach((key, index) => {
+//     var products ;
+//     for (let i = 1; i < values.length; i++) {
+//         const headers = values[i];
+//         debugger;
+//          products = values.slice(1).map(row => {
+//         let productObj = {};
+//         headers.forEach((key, index) => {
           
-            productObj[key] = row[index] || ""; // Handle missing values
-        });
-        return productObj;
-    });
-    }
-    // Extract data rows
+//             productObj[key] = row[index] || ""; // Handle missing values
+//         });
+//         return productObj;
+//     });
+//     }
+//     // Extract data rows
    
-console.log("DTAAT");
-    console.log(products);
+// console.log("DTAAT");
+//     console.log(products);
+
+
+  // Extract headers from the first row
+  const headers = values[0];
+
+console.log("Headers:", headers);
+
+// Extract data rows
+const products = values.slice(1).map(row => {
+    let productObj = {};
+    headers.forEach((key, index) => {
+        productObj[key] = row[index] || ""; // Handle missing values
+    });
+    return productObj;
+});
+
+console.log("DATA:", products);
 }
 
 
