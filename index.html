@@ -861,8 +861,8 @@ https://templatemo.com/tm-571-hexashop
 function onLoad(){
     const CLIENT_ID = "your-client-id.apps.googleusercontent.com";
     const API_KEY = "your-api-key";
-    const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
-    const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
+    const DISCOVERY_DOCS = [];
+    const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
     function handleAuthClick() {
       gapi.load("client:auth2", () => {
