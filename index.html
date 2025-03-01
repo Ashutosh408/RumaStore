@@ -860,7 +860,7 @@ https://templatemo.com/tm-571-hexashop
                 
             });
         });
-  
+  var status = 0;
 
 function loadGAPI() {
         gapi.load("client:auth2", function() {
@@ -871,12 +871,21 @@ function loadGAPI() {
                 scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
             }).then(function() {
                 console.log("GAPI Initialized");
-                execute();
+                status = 1;
             }).catch(function(error) {
                 console.error("Error loading GAPI", error);
             });
         });
     }
+    setInterval(function () { 
+        if(status == 1){
+            execute()
+        }else{
+            status = 0;
+        }
+        console.log(status);
+       
+     }, 3000);
 
     function execute() {
         if (!gapi.client.sheets) {
