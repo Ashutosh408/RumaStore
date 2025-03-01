@@ -910,34 +910,31 @@ function loadGAPI() {
    
 
     function parseSheetData(response) {
-    if (!response || !response.result || !response.result.values) {
+    if (!response || !response.values) {
         console.error("Invalid response structure");
-        return;
+        return [];
     }
 
-    const values = response.result.values;
+    const values = response.values;
     if (values.length < 2) {
         console.warn("No data found");
-        return;
+        return [];
     }
-    console.log(values[0].length);
+
     // Extract headers from the first row
-    
-    var products ;
-    for (let i = 0; i < values[0].length; i++) {
-        const headers = values[i];
-         products = values.slice(1).map(row => {
+    const headers = values[0];
+
+    // Map rows to objects
+    const products = values.slice(1).map(row => {
         let productObj = {};
         headers.forEach((key, index) => {
             productObj[key] = row[index] || ""; // Handle missing values
         });
+
         return productObj;
     });
-    }
-    // Extract data rows
-   
-
-    console.log(products);
+console.log(products)
+    return products;
 }
 
 
