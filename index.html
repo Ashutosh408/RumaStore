@@ -222,7 +222,6 @@ https://templatemo.com/tm-571-hexashop
     <!-- ***** Main Banner Area End ***** -->
 
     <!-- ***** Men Area Starts ***** -->
-    <button class="btn btn-primary" onclick="authenticate().then(loadClient)">authorize and load</button>
     <button class="btn btn-primary"  onclick="execute()">execute</button>
     <section class="section" id="men">
         <div class="container">
@@ -863,29 +862,8 @@ https://templatemo.com/tm-571-hexashop
     </script>
 
 <script>
-  /**
-   * Sample JavaScript code for sheets.spreadsheets.values.get
-   * See instructions for running APIs Explorer code samples locally:
-   * https://developers.google.com/explorer-help/code-samples#javascript
-   */
-
-  function authenticate() {
-    return gapi.auth2.getAuthInstance()
-        .signIn({scope: "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/spreadsheets.readonly"})
-        .then(function() { console.log("Sign-in successful"); },
-              function(err) { console.error("Error signing in", err); });
-  }
-  function loadClient() {
-    gapi.client.setApiKey("AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E");
-
-    return gapi.client.load("https://sheets.googleapis.com/$discovery/rest?version=v4")
-        .then(function() { console.log("GAPI client loaded for API"); },
-              function(err) { console.error("Error loading GAPI client for API", err); });
-  }
-  // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
-    try{
-        return gapi.client.sheets.spreadsheets.values.get({
+    return gapi.client.sheets.spreadsheets.values.get({
       "spreadsheetId": "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
       "range": "ProductList",
       "dateTimeRenderOption": "FORMATTED_STRING",
@@ -899,11 +877,10 @@ https://templatemo.com/tm-571-hexashop
               function(err) { console.error("Execute error", err); });
   }
   gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com"});
+    gapi.auth2.init({client_id: "YOUR_CLIENT_ID"});
   });
-    }catch(ex){
-        console.log("Err" , ex)
-    }
+ 
+     
    
 </script>
 
