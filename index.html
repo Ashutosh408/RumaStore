@@ -922,16 +922,20 @@ function loadGAPI() {
     }
     console.log(values[0].length);
     // Extract headers from the first row
-    const headers = values[0];
-
-    // Extract data rows
-    const products = values.slice(1).map(row => {
+    
+    var products ;
+    for (let i = 0; i < values[0].length; i++) {
+        const headers = values[i];
+         products = values.slice(1).map(row => {
         let productObj = {};
         headers.forEach((key, index) => {
             productObj[key] = row[index] || ""; // Handle missing values
         });
         return productObj;
     });
+    }
+    // Extract data rows
+   
 
     console.log(products);
 }
