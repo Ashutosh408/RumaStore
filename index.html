@@ -891,7 +891,6 @@ https://templatemo.com/tm-571-hexashop
 
 
 function loadGAPI() {
-    console.log("1. loadGAPI")
         gapi.load("client:auth2", function() {
             gapi.client.init({
                 apiKey: "AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E",
@@ -907,13 +906,11 @@ function loadGAPI() {
     }
 
     function execute() {
-        console.log("2. execute")
         if (!gapi.client.sheets) {
             console.error("GAPI client not initialized yet.");
             return;
         }
 
-        console.log("Click 1");
         return gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
             range: "ProductList",
@@ -922,9 +919,7 @@ function loadGAPI() {
             valueRenderOption: "FORMATTED_VALUE"
         })
         .then(function(response) {
-            console.log("Click 2");
-            console.log("Response", response);
-            console.log("Click 3");
+            console.log("Response", JSON.stringify(response.body));
         }, function(err) { 
             console.error("Execute error", err);
         });
