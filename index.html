@@ -878,7 +878,9 @@ function loadGAPI() {
         });
     }
     
-$(document).click(function(){  execute()});
+    $(document).click(function(){  
+        execute();
+    });
     function execute() {
         if (!gapi.client.sheets) {
             console.error("GAPI client not initialized yet.");
@@ -893,7 +895,33 @@ $(document).click(function(){  execute()});
             valueRenderOption: "FORMATTED_VALUE"
         })
         .then(function(response) {
-            console.log("Response", JSON.parse(response.body));
+            console.log("Response", JSON.parse(response.body.values));
+            var prod = response.body.values;
+            var main_box ;
+            console.log(prod);
+            for (let i = 1; i < prod.length; i++) {
+                main_box = main_box + `<div class="col-lg-3 col-md-6 col-2">
+                                <div class="right-first-image">           
+                                    <div class="thumb">
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <h4> Jeshshsh </h4>
+                                                <p>Gentel Skin Clenser</p>
+                                                <div class="main-border-button">
+                                                    <a href="#">Buy Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="https://ik.imagekit.io/anscommerce/image/tr:e-sharpen-01,h-400,w-400,cm-pad_resize/data/galderma/08may2024/F47013_1.jpg">
+                                        <div class="inner-content">
+                                            <h4>Cetaphil</h4>
+                                            <span>Gentel Skin Clenser</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                    }  
+             
         }, function(err) { 
             console.error("Execute error", err);
         });
