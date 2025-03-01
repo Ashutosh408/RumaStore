@@ -895,8 +895,8 @@ function loadGAPI() {
             valueRenderOption: "FORMATTED_VALUE"
         })
         .then(function(response) {
-            console.log("Response", JSON.parse(response.body.values));
-            var prod = JSON.parse(response.body.values);
+            console.log("Response", JSON.parse(response.body));
+            var prod = JSON.parse(response.body);
            console.log(prod);
             
        
