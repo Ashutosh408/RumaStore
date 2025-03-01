@@ -858,43 +858,6 @@ https://templatemo.com/tm-571-hexashop
                 
             });
         });
-        console.log("onLoad 2");
-
-function onLoad(){
-    console.log("onLoad");
-    const CLIENT_ID = "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com";
-    const API_KEY = "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";
-    const DISCOVERY_DOCS = [];
-    const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
-
-    gapi.load("client:auth2", () => {
-        gapi.client.init({ apiKey: API_KEY, clientId: CLIENT_ID, discoveryDocs: DISCOVERY_DOCS, scope: SCOPES }).then(() => {
-          gapi.auth2.getAuthInstance().signIn().then(() => {
-            console.log("Auth Done");
-            readSheet();
-            console.log("Read Sheet Done");
-          });
-        });
-      });
-
-}
-
-function readSheet() {
-        console.log("Read Sheet 1");
-      const sheetID = "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY";
-      const range = "ProductList";
-      console.log("Read Sheet 2");
-      gapi.client.sheets.spreadsheets.values.get({ spreadsheetId: sheetID, range }).then(response => {
-        console.log("Read Sheet 3");
-        console.log("Data:", response.result.values);
-        console.log("Read Sheet 4");
-      });
-    }
-
-onLoad();
-
-
-   
     </script>
 <script src="https://apis.google.com/js/api.js"></script>
 <script>
