@@ -924,13 +924,13 @@ function loadGAPI() {
     // Extract headers from the first row
     
     var products ;
-    for (let i = 0; i < values.length; i++) {
-        
+    for (let i = 1; i < values.length; i++) {
         const headers = values[i];
+        debugger;
          products = values.slice(1).map(row => {
         let productObj = {};
         headers.forEach((key, index) => {
-            debugger;
+          
             productObj[key] = row[index] || ""; // Handle missing values
         });
         return productObj;
