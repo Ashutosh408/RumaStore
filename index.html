@@ -859,31 +859,31 @@ https://templatemo.com/tm-571-hexashop
         });
 
 function onLoad(){
-// https://docs.google.com/spreadsheets/d/e/2PACX-1vSsUkFq8e6Vk2RKk-whNIeMJOreuLkxZ1hv9k4E73fjR30cTOmI7kRwfwMaYqBpnJVxXZ3TJvQqsB5v/pubhtml?gid=0&single=true
-//const serverURL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSsUkFq8e6Vk2RKk-whNIeMJOreuLkxZ1hv9k4E73fjR30cTOmI7kRwfwMaYqBpnJVxXZ3TJvQqsB5v/pub?gid=0&single=true&output=csv`;
+    const CLIENT_ID = "your-client-id.apps.googleusercontent.com";
+    const API_KEY = "your-api-key";
+    const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+    const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
-     const serverURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSsUkFq8e6Vk2RKk-whNIeMJOreuLkxZ1hv9k4E73fjR30cTOmI7kRwfwMaYqBpnJVxXZ3TJvQqsB5v/pubhtml?gid=0&single=true";
-
-$.ajax({
-    type: "POST", 
-crossDomain: true, 
-url: serverURL,
- data: JSON.stringify(),
- async: true, 
- contentType: "application/json; charset=utf-8",
-  dataType: "JSON" 
-}).done(function (resultdata) {
-
-    console.log(resultdata); 
-    
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-     console. log("request." + jqXHR + " InStatus." + textStatus + "\n error." + jqXHR.responseText); 
-     alert ("Error in trns"); 
-     console.log(textStatus); 
-    
-     return false;
-     });
+    function handleAuthClick() {
+      gapi.load("client:auth2", () => {
+        gapi.client.init({ apiKey: "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", clientId: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com", discoveryDocs: DISCOVERY_DOCS, scope: SCOPES }).then(() => {
+          gapi.auth2.getAuthInstance().signIn().then(() => {
+            readSheet();
+          });
+        });
+      });
     }
+
+    function readSheet() {
+      const sheetID = "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY";
+      const range = "ProductList";
+
+      gapi.client.sheets.spreadsheets.values.get({ spreadsheetId: sheetID, range }).then(response => {
+        console.log("Data:", response.result.values);
+      });
+    }
+
+}
 
     onLoad();
     </script>
