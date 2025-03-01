@@ -42,7 +42,8 @@ https://templatemo.com/tm-571-hexashop
         </div>
     </div>  
     <!-- ***** Preloader End ***** -->
-    
+    <button onclick="authenticate().then(loadClient)">authorize and load</button>
+<button onclick="execute()">execute</button>
     
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
@@ -889,9 +890,52 @@ function readSheet() {
         console.log("Read Sheet 4");
       });
     }
+
 onLoad();
+
+
    
     </script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+  /**
+   * Sample JavaScript code for sheets.spreadsheets.values.get
+   * See instructions for running APIs Explorer code samples locally:
+   * https://developers.google.com/explorer-help/code-samples#javascript
+   */
+
+  function authenticate() {
+    return gapi.auth2.getAuthInstance()
+        .signIn({scope: "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/spreadsheets.readonly"})
+        .then(function() { console.log("Sign-in successful"); },
+              function(err) { console.error("Error signing in", err); });
+  }
+  function loadClient() {
+    gapi.client.setApiKey("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");
+    return gapi.client.load("https://sheets.googleapis.com/$discovery/rest?version=v4")
+        .then(function() { console.log("GAPI client loaded for API"); },
+              function(err) { console.error("Error loading GAPI client for API", err); });
+  }
+  // Make sure the client is loaded and sign-in is complete before calling this method.
+  function execute() {
+    return gapi.client.sheets.spreadsheets.values.get({
+      "spreadsheetId": "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
+      "range": "ProductList",
+      "dateTimeRenderOption": "FORMATTED_STRING",
+      "majorDimension": "ROWS",
+      "valueRenderOption": "FORMATTED_VALUE"
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
+  gapi.load("client:auth2", function() {
+    gapi.auth2.init({client_id: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com"});
+  });
+</script>
+
 
   </body>
 </html>
