@@ -862,55 +862,110 @@ https://templatemo.com/tm-571-hexashop
         });
   var status = 0;
 
-function loadGAPI() {
-        gapi.load("client:auth2", function() {
-            gapi.client.init({
-                apiKey: "AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E",
-                clientId: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com",
-                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-                scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
-            }).then(function() {
-                console.log("GAPI Initialized");
-                status = 1;
-            }).catch(function(error) {
-                console.error("Error loading GAPI", error);
-            });
-        });
-    }
-    setInterval(function () { 
-        if(status == 1){
-            execute()
-        }else{
-            status = 0;
-        }
-        console.log(status);
+// function loadGAPI() {
+//         gapi.load("client:auth2", function() {
+//             gapi.client.init({
+//                 apiKey: "AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E",
+//                 clientId: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com",
+//                 discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+//                 scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
+//             }).then(function() {
+//                 console.log("GAPI Initialized");
+//                 status = 1;
+//             }).catch(function(error) {
+//                 console.error("Error loading GAPI", error);
+//             });
+//         });
+//     }
+//     setInterval(function () { 
+//         if(status == 1){
+//             execute()
+//         }else{
+//             status = 0;
+//         }
+//         console.log(status);
        
-     }, 3000);
+//      }, 3000);
 
-    function execute() {
-        if (!gapi.client.sheets) {
-            console.error("GAPI client not initialized yet.");
-            return;
-        }
+//     function execute() {
+//         if (!gapi.client.sheets) {
+//             console.error("GAPI client not initialized yet.");
+//             return;
+//         }
 
-        return gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
-            range: "ProductList",
-            dateTimeRenderOption: "FORMATTED_STRING",
-            majorDimension: "ROWS",
-            valueRenderOption: "FORMATTED_VALUE"
-        })
-        .then(function(response) {
-            console.log("Response", JSON.parse(response.body));
-        }, function(err) { 
-            console.error("Execute error", err);
-        });
-    }
+//         return gapi.client.sheets.spreadsheets.values.get({
+//             spreadsheetId: "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
+//             range: "ProductList",
+//             dateTimeRenderOption: "FORMATTED_STRING",
+//             majorDimension: "ROWS",
+//             valueRenderOption: "FORMATTED_VALUE"
+//         })
+//         .then(function(response) {
+//             console.log("Response", JSON.parse(response.body));
+//         }, function(err) { 
+//             console.error("Execute error", err);
+//         });
+//     }
 
-    // Load GAPI on page load
-    window.onload = loadGAPI;
+//     // Load GAPI on page load
+//     window.onload = loadGAPI;
      
    
+
+
+let accessToken = "";
+
+function handleCredentialResponse(response) {
+    console.log("ID Token: ", response.credential);
+    // Send response.credential to your backend for verification
+}
+
+function initializeGAPI() {
+    gapi.load("client", async () => {
+        await gapi.client.init({
+            apiKey: "AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E",
+            discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+        });
+        console.log("GAPI Initialized");
+    });
+}
+
+function fetchGoogleSheet() {
+    if (!accessToken) {
+        console.error("User not signed in.");
+        return;
+    }
+
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
+        range: "ProductList",
+        dateTimeRenderOption: "FORMATTED_STRING",
+        majorDimension: "ROWS",
+        valueRenderOption: "FORMATTED_VALUE"
+    }).then(response => {
+        console.log("Response:", response.result.values);
+    }).catch(err => console.error("Execute error", err));
+}
+
+function initGoogleSignIn() {
+    google.accounts.id.initialize({
+        client_id: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com",
+        callback: response => {
+            console.log("Google Sign-in Response:", response);
+            accessToken = response.credential;
+        }
+    });
+    google.accounts.id.renderButton(
+        document.getElementById("signin-btn"),
+        { theme: "outline", size: "large" }
+    );
+}
+
+window.onload = () => {
+    initializeGAPI();
+    initGoogleSignIn();
+    $(document).click(function() {fetchGoogleSheet() });
+};
 </script>
 
 
