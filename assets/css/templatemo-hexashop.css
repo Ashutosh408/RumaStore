@@ -274,6 +274,7 @@ header
 }
 
 .header-area .main-nav .logo .logo-Text {
+  color:#000;
   padding-left: 11px;
 }
 .header-area .main-nav .logo .logo-Text p {
