@@ -563,6 +563,11 @@ header
   .header-area .logo {
     margin-left: 30px;
   }
+  .header-area .logo  img{
+    width: 75px;
+    border-radius: 70px;
+  }
+ 
   .header-area .menu-trigger {
     display: block !important;
   }
