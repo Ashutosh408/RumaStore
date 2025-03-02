@@ -712,7 +712,11 @@ banner
   color: #fff;
   font-size: 24px;
   font-weight: 700;
-  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .main-banner .right-content .right-first-image .thumb .inner-content span {
