@@ -247,7 +247,10 @@ function renderProducts(products) {
         <div class="col-lg-2 col-md-6 col-6 p-0">
                                 <div class="right-first-image">           
                                     <div class="thumb">
-                                        <img src="${product["Product Image"]}" alt="Ruma's Store: ${product["Product Name"]} " />
+                                        <div clss="thumb_img">
+                                             <img src="${product["Product Image"]}" alt="Ruma's Store: ${product["Product Name"]} " />
+
+                                        </div>
                                            <div class="inner-content">
                                             <p>${product["Product Name"]}</p>
                                             <span>${product["Product Short"]}</span>
