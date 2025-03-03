@@ -705,6 +705,7 @@ banner
 
 .main-banner .right-content .right-first-image {
   margin-bottom: 28.5px;
+  height: 15em;
 }
 
 .main-banner .right-content .right-first-image .thumb {
@@ -716,7 +717,7 @@ banner
 .main-banner .right-content .right-first-image .thumb img {
   width: 100%;
   overflow: hidden;
-  height: 20em;
+  /* height: 20em; */
 }
 
 .main-banner .right-content .right-first-image .thumb .inner-content {
