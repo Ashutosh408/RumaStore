@@ -44,8 +44,8 @@
                         <a href="index.html" class="logo">
                             <img src="assets/images/RumaStore Logo.png">
                             <div class="logo-Text">
-                                <h3>RUMA STORE's</h3>
-                                <p>ONLINE SHOPPING</p>
+                                <h3 style="color:#310654;">RUMA's STORE</h3>
+                                <p style="color:#c083f1;">ONLINE SHOPPING</p>
                             </div>                          
 
                         </a>
@@ -94,6 +94,8 @@
                 <div class="col-lg-12">
                     <div class="right-content">
                         <div class="row" id="product-container">
+                            
+                        
                      </div>     
                 </div>
             </div>
@@ -242,26 +244,20 @@ function renderProducts(products) {
 
     products.forEach(product => {
         let productHTML = `
-        <div class="col-lg-3 col-md-6 col-12">
-            <div class="right-first-image">           
-                <div class="thumb">
-                    <div class="hover-content">
-                        <div class="inner">
-                            <h4>${product["Product Name"]}</h4>
-                            <p>${product["Product Short"]}</p>
-                            <div class="main-border-button">
-                                <a href="${product["Product Link"]}">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="${product["Product Image"]}">
-                    <div class="inner-content">
-                        <h4>${product["Product Name"]}</h4>
-                        <span>${product["Product Desc"]}</span>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+        <div class="col-lg-2 col-md-6 col-6 p-0">
+                                <div class="right-first-image">           
+                                    <div class="thumb">
+                                        <img src="${product["Product Image"]}" alt="Ruma's Store: ${product["Product Name"]} " />
+                                           <div class="inner-content">
+                                            <p>${product["Product Name"]}</p>
+                                            <span>${product["Product Short"]}</span>
+                                            <div class="section-button">
+                                                <a href="${product["Product Link"]}" class="btn ">Buy Now</a>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
 
         container.innerHTML += productHTML;
     });

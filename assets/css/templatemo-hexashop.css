@@ -704,14 +704,14 @@ banner
 }
 
 .main-banner .right-content .right-first-image {
+  margin: 5px;
   margin-bottom: 28.5px;
-  height: 15em;
 }
 
 .main-banner .right-content .right-first-image .thumb {
   position: relative;
   text-align: center;
-     box-shadow: 1px 3px 10px #d5d5d5;
+     /* box-shadow: 1px 3px 10px #d5d5d5; */
 }
 
 .main-banner .right-content .right-first-image .thumb img {
@@ -721,20 +721,16 @@ banner
 }
 
 .main-banner .right-content .right-first-image .thumb .inner-content {
-  text-align: center;
-  background-color: #0000008f;
-  padding: 10px 15px;
-  height: 5em;
+     text-align: left;
+    padding: 5px 2px;
 }
 
-.main-banner .right-content .right-first-image .thumb .inner-content h4 {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 700;
+.main-banner .right-content .right-first-image .thumb .inner-content p {
+  font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -747,6 +743,24 @@ banner
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+
+ .section-button .btn {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 1em 3.5em;
+  box-shadow: 0 0 0 2px #310654 inset;
+  color: #310654;
+  background-color: transparent;
+  font-size: 12px;
+  border-radius: 40px;
+  letter-spacing: 1px;
+  transition: 0.5sease-in-out;
+  width:100%;
+}
+.section-button .btn:hover {
+  box-shadow: 0 0 0 2em #310654 inset;
+  color: #c083f1;
 }
 
 .main-banner .right-content .right-first-image .thumb .hover-content {
