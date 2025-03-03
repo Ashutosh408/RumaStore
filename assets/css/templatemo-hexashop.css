@@ -711,13 +711,20 @@ banner
 .main-banner .right-content .right-first-image .thumb {
   position: relative;
   text-align: center;
-     /* box-shadow: 1px 3px 10px #d5d5d5; */
 }
-
+.main-banner .right-content .right-first-image .thumb  .thumb_img {
+  position: relative;
+  height: 280px;
+  max-height: 280px;
+  line-height: 270px;
+}
 .main-banner .right-content .right-first-image .thumb img {
   width: 100%;
-  overflow: hidden;
-  /* height: 20em; */
+  max-height: 100%;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  transition: opacity 0.3slinear;
 }
 
 .main-banner .right-content .right-first-image .thumb .inner-content {
