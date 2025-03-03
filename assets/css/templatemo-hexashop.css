@@ -761,7 +761,7 @@ banner
   transition: all 0.5s;
 }
 
-.main-banner .right-content .right-first-image .thumb:focus .hover-content {
+.main-banner .right-content .right-first-image .thumb:hover .hover-content {
   opacity: 1;
   visibility: visible;
   height:100%;
