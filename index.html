@@ -222,6 +222,8 @@ function renderProducts(products) {
     let container = document.getElementById("product-container"); // Assuming you have a div with this ID
     container.innerHTML = ""; // Clear previous content
 
+
+    //If Y
     products.forEach(product => {
         if(product["Product Active"] == "Y"){
             let productHTML = `
