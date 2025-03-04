@@ -19,7 +19,27 @@
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" /> </head>
-    
+     <!-- Global Init -->
+     <script src="assets/js/custom.js"></script>
+     <!-- Google Api Call -->
+     <script src="https://apis.google.com/js/api.js"></script>
+   <script>
+        function loadGAPI() {
+        gapi.load("client:auth2", function() {
+            gapi.client.init({
+                apiKey: "AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E",
+                clientId: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com",
+                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+                scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
+            }).then(function() {
+                console.log("GAPI Initialized");
+               
+            }).catch(function(error) {
+                console.error("Error loading GAPI", error);
+            });
+        });
+    }
+    </script>
     <body>
     
     <!-- ***** Preloader Start ***** -->
@@ -119,10 +139,7 @@
     <script src="assets/js/lightbox.js"></script> 
     <script src="assets/js/isotope.js"></script> 
     
-    <!-- Global Init -->
-    <script src="assets/js/custom.js"></script>
-    <!-- Google Api Call -->
-    <script src="https://apis.google.com/js/api.js"></script>
+  
 
     <script>
         $(function() {
@@ -140,21 +157,7 @@
         });
   var status = 0;
 
-function loadGAPI() {
-        gapi.load("client:auth2", function() {
-            gapi.client.init({
-                apiKey: "AIzaSyDKRgaB_qeHT3ukkubL90XzjKOTFJxdr9E",
-                clientId: "166007579082-i9nhf47kpr43701brf5vsnvjp31guqoe.apps.googleusercontent.com",
-                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-                scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
-            }).then(function() {
-                console.log("GAPI Initialized");
-               
-            }).catch(function(error) {
-                console.error("Error loading GAPI", error);
-            });
-        });
-    }
+window.onload = execute;
     
     $(document).click(function(){  
         execute();
@@ -164,7 +167,6 @@ function loadGAPI() {
             console.error("GAPI client not initialized yet.");
             return;
         }
-
         return gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: "1y1_-mRWT2GQj7YFNhhKFX4JT3mUuFBfPGojwh5OU7dY",
             range: "ProductList",
@@ -178,12 +180,8 @@ function loadGAPI() {
             console.error("Execute error", err);
         });
     }
-
     // Load GAPI on page load
     window.onload = loadGAPI;
-     
-   
-
     function parseSheetData(response) {
     if (!response || !response.result || !response.result.values) {
         console.error("Invalid response structure");
@@ -198,49 +196,42 @@ function loadGAPI() {
 
   // Extract headers from the first row
   const headers = values[0];
-
-
 // Extract data rows
 const products = values.slice(1).map(row => {
     let productObj = {};
     headers.forEach((key, index) => {
-        productObj[key] = row[index] || ""; // Handle missing values
-
-
+        productObj[key] = row[index] || "";
     });
     return productObj;
 });
 
  // Call function to render products
     renderProducts(products);
-
 }
 
 function renderProducts(products) {
-    let container = document.getElementById("product-container"); // Assuming you have a div with this ID
-    container.innerHTML = ""; // Clear previous content
+    let container = document.getElementById("product-container"); 
+    container.innerHTML = ""; 
 
     products.forEach(product => {
-        if( $(".right-first-image").length != products.length && product["Product Active"] == "Y"){
-            let productHTML = `
-        <div class="col-lg-2 col-md-6 col-6 p-0">
-                                <div class="right-first-image">           
-                                    <div class="thumb">
-                                        <div class="thumb_img">
-                                             <img src="${product["Product Image"]}" alt="Ruma's Store: ${product["Product Name"]} " />
+        if(product["Product Active"] == "Y"){
+            let productHTML = `<div class="col-lg-2 col-md-6 col-6 p-0">
+                                    <div class="right-first-image">           
+                                        <div class="thumb">
+                                            <div class="thumb_img">
+                                                <img src="${product["Product Image"]}" alt="Your Wishlist: ${product["Product Name"]} " />
 
-                                        </div>
-                                           <div class="inner-content">
-                                            <p>${product["Product Name"]}</p>
-                                            <span>${product["Product Short"]}</span>
-                                            <div class="section-button">
-                                                <a href="${product["Product Link"]}" class="btn ">Buy Now</a>
-                                              </div>
+                                            </div>
+                                            <div class="inner-content">
+                                                <p>${product["Product Name"]}</p>
+                                                <span>${product["Product Short"]}</span>
+                                                <div class="section-button">
+                                                    <a href="${product["Product Link"]}" class="btn ">Buy Now</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>`;
-
+                                </div>`;
         container.innerHTML += productHTML;
         }
         
