@@ -193,6 +193,9 @@ function loadGAPI() {
         clearInterval(execute);
         handle = 0; // I just do this so I know I've cleared the interval
     
+    $(document).click(function(){
+        execute() ;
+    });
     function execute() {
         console.log("Page execute");
 
