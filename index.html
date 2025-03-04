@@ -166,9 +166,11 @@ function loadGAPI() {
                 scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
             }).then(function() {
                 console.log("GAPI Initialized");
+
                 execute();
             }).catch(function(error) {
                 console.error("Error loading GAPI", error);
+                execute();
             });
         });
     }
