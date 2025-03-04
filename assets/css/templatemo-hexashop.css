@@ -661,6 +661,10 @@ color: #9d9191;
   }
 }
 /* Search bar */
+.search-bar{
+  margin-bottom: 2em;
+
+}
 .search-bar .input-group {
   width: 100%;
   flex-flow: row;
