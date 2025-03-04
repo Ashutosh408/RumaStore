@@ -178,7 +178,7 @@ function loadGAPI() {
     }
         // Load GAPI on page load
 
-    $(document).load(function(){  
+ function onloadFun(){  
         console.log("Page Load");
         try{
             console.log("loadGAPI Load");
@@ -197,7 +197,9 @@ function loadGAPI() {
 
 
         }
-    });
+    };
+
+    onloadFun();
     function execute() {
         if (!gapi.client.sheets) {
             console.error("GAPI client not initialized yet.");
