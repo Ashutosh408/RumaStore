@@ -219,10 +219,9 @@ const products = values.slice(1).map(row => {
 function renderProducts(products) {
     let container = document.getElementById("product-container"); // Assuming you have a div with this ID
     container.innerHTML = ""; // Clear previous content
-console.log(products.length);
-if($(".right-first-image").length != products.length){
+
     products.forEach(product => {
-        if(product["Product Active"] == "Y"){
+        if( $(".right-first-image").length != products.length && product["Product Active"] == "Y"){
             let productHTML = `
         <div class="col-lg-2 col-md-6 col-6 p-0">
                                 <div class="right-first-image">           
@@ -246,7 +245,7 @@ if($(".right-first-image").length != products.length){
         }
         
     });
-    }
+    
 }
 
 
