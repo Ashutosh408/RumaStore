@@ -166,39 +166,17 @@ function loadGAPI() {
                 scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
             }).then(function() {
                 console.log("GAPI Initialized");
-
                 execute();
             }).catch(function(error) {
                 console.error("Error loading GAPI", error);
-               
             });
         });
-
-        execute();
     }
-        // Load GAPI on page load
-
- function onloadFun(){  
-        console.log("Page Load");
-        try{
-            loadGAPI();
-        }catch(err){
-            console.log(err);
-        }
-    };
-
-    var handle = setInterval(execute, 2000);
-
-        // When you want to cancel it:
-        clearInterval(execute);
-        handle = 0; // I just do this so I know I've cleared the interval
     
-    $(document).click(function(){
-        execute() ;
+    $(document).click(function(){  
+        execute();
     });
     function execute() {
-        console.log("Page execute");
-
         if (!gapi.client.sheets) {
             console.error("GAPI client not initialized yet.");
             return;
@@ -214,12 +192,18 @@ function loadGAPI() {
         .then(function(response) {
             console.log("Response", JSON.parse(response.body));
             parseSheetData(response);
+
+       
         }, function(err) { 
             console.error("Execute error", err);
         });
     }
 
+    // Load GAPI on page load
+    window.onload = loadGAPI;
+     
    
+
     function parseSheetData(response) {
     if (!response || !response.result || !response.result.values) {
         console.error("Invalid response structure");
