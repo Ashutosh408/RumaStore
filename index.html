@@ -181,26 +181,21 @@ function loadGAPI() {
  function onloadFun(){  
         console.log("Page Load");
         try{
-            console.log("loadGAPI Load");
-
-            loadGAPI()
-            console.log("loadGAPI Execute");
-
+            loadGAPI();
         }catch(err){
             console.log(err);
-
-        }finally{
-            console.log("execute Load");
-
-            execute();
-            console.log("execute() Execute");
-
-
         }
     };
 
-    onloadFun();
+    var handle = setInterval(execute, 2000);
+
+        // When you want to cancel it:
+        clearInterval(execute);
+        handle = 0; // I just do this so I know I've cleared the interval
+    
     function execute() {
+        console.log("Page execute");
+
         if (!gapi.client.sheets) {
             console.error("GAPI client not initialized yet.");
             return;
