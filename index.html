@@ -150,7 +150,7 @@ function loadGAPI() {
                 scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
             }).then(function() {
                 console.log("GAPI Initialized");
-                execute();
+               
             }).catch(function(error) {
                 console.error("Error loading GAPI", error);
             });
@@ -174,10 +174,7 @@ function loadGAPI() {
             valueRenderOption: "FORMATTED_VALUE"
         })
         .then(function(response) {
-            console.log("Response", JSON.parse(response.body));
             parseSheetData(response);
-
-       
         }, function(err) { 
             console.error("Execute error", err);
         });
@@ -216,7 +213,6 @@ const products = values.slice(1).map(row => {
     return productObj;
 });
 
-console.log("DATA:", products);
  // Call function to render products
     renderProducts(products);
 
@@ -227,7 +223,8 @@ function renderProducts(products) {
     container.innerHTML = ""; // Clear previous content
 
     products.forEach(product => {
-        let productHTML = `
+        if(product["Product Active"] == "Y"){
+            let productHTML = `
         <div class="col-lg-2 col-md-6 col-6 p-0">
                                 <div class="right-first-image">           
                                     <div class="thumb">
@@ -247,6 +244,8 @@ function renderProducts(products) {
                             </div>`;
 
         container.innerHTML += productHTML;
+        }
+        
     });
 }
 
