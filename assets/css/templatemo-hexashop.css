@@ -660,8 +660,15 @@ color: #9d9191;
     display: flex !important;
   }
 }
-
-
+/* Search bar */
+.search-bar .input-group {
+  width: 100%;
+  flex-flow: row;
+}
+.search-bar .form-outline {
+  display: flex;
+  width: 100%;
+}
 /* 
 ---------------------------------------------
 banner
