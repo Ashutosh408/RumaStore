@@ -176,9 +176,27 @@ function loadGAPI() {
 
         execute();
     }
-    
-    $(document).click(function(){  
-        execute();
+        // Load GAPI on page load
+
+    $(document).load(function(){  
+        console.log("Page Load");
+        try{
+            console.log("loadGAPI Load");
+
+            loadGAPI()
+            console.log("loadGAPI Execute");
+
+        }catch(err){
+            console.log(err);
+
+        }finally{
+            console.log("execute Load");
+
+            execute();
+            console.log("execute() Execute");
+
+
+        }
     });
     function execute() {
         if (!gapi.client.sheets) {
@@ -201,10 +219,7 @@ function loadGAPI() {
         });
     }
 
-    // Load GAPI on page load
-    window.onload = loadGAPI;
-    execute() ;
-     
+   
     function parseSheetData(response) {
     if (!response || !response.result || !response.result.values) {
         console.error("Invalid response structure");
